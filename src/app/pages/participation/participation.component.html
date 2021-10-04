@@ -4,4 +4,5 @@
 <a>Freie Plätze: {{event?.freeSpots}} von {{event?.maxParticipants}}</a>
 <p>{{event?.description}}</p>
 
-<button (click)="unregister()">Abmelden</button>
+<button [disabled]="loading" (click)="unregister()">Abmelden</button>
+<span class="loading" [hidden]="!loading">Loading...</span>

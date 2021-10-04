@@ -12,7 +12,9 @@ export class ApiService {
   types0?: EventType[]
 
   constructor(private readonly http: HttpClient) {
-    this.fetchEventTypes0().subscribe(types => this.types0 = types)
+    this.fetchEventTypes0().subscribe(types => {
+      this.types0 = types.filter(value => new Date(value.registrationEndTime) > new Date() && new Date(value.registrationStartTime) < new Date())
+    })
   }
 
   get types() {

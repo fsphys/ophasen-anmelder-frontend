@@ -15,6 +15,7 @@ export class EventComponent implements OnInit {
   event?: Event
   form: FormGroup
   backendError?: string
+  loading?: boolean;
 
   constructor(private readonly apiService: ApiService,
               private readonly activatedRoute: ActivatedRoute,
@@ -34,11 +35,13 @@ export class EventComponent implements OnInit {
 
   submit() {
     if (!this.form.valid || !this.event) return;
+    this.loading = true;
     this.apiService.joinEvent(this.event.id, this.form.value.surname, this.form.value.givenName, this.form.value.mail)
       .pipe(switchMap(value => this.router.navigate(['/participation', value.id], {queryParams: {success: true}}))).subscribe(value => {
       // noop
     }, error => {
       this.backendError = error.error.message;
+      this.loading = false;
     });
   }
 }

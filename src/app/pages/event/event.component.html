@@ -37,7 +37,8 @@
     </span>
   </label>
   <br>
-  <input type="submit" value="Anmelden">
+  <input type="submit" value="Anmelden" [disabled]="loading">
+  <span class="loading" [hidden]="!loading">Loading...</span>
   <br>
   <span class="backendError" *ngIf="backendError">{{backendError}}</span>
 </form>

@@ -15,6 +15,7 @@ export class ParticipationComponent implements OnInit {
   event?: Event
   eventParticipation?: EventParticipation
   success?: string
+  loading?: boolean;
 
   constructor(private readonly apiService: ApiService,
               private readonly activatedRoute: ActivatedRoute,
@@ -33,9 +34,10 @@ export class ParticipationComponent implements OnInit {
   }
 
   unregister() {
+    this.loading = true;
     this.activatedRoute.params.pipe(
       switchMap(params => this.apiService.deleteParticipation(params['id'])),
-      catchError(error => throwError(this.router.navigate(['/'], {queryParams: {error: error.error.message}})))
+      catchError(error => throwError(this.router.navigate(['/participation'], {queryParams: {error: error.error.message}})))
     ).subscribe(value => this.router.navigate(['/'], {queryParams: {success: 'Deine Abmeldung war erfolgreich.'}}));
   }
 }
