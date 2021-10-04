@@ -1,0 +1,43 @@
+<h1>{{event?.name}}</h1>
+<a>Freie Plätze: {{event?.freeSpots}} von {{event?.maxParticipants}}</a>
+<p>{{event?.description}}</p>
+<form [formGroup]="form" (submit)="submit()">
+  <label>
+    Vorname
+    <input formControlName="surname" name="surname" type="text" required maxlength="255">
+    <span class="error"
+          *ngIf="form.controls.surname.touched && form.controls.surname.errors?.required">
+      <br>
+      Vorname darf nicht leer sein!
+    </span>
+  </label>
+  <br>
+  <label>
+    Nachname
+    <input formControlName="givenName" name="givenName" type="text" required maxlength="255">
+    <span class="error"
+          *ngIf="form.controls.givenName.touched && form.controls.givenName.errors?.required">
+      <br>
+      Nachname darf nicht leer sein!
+    </span>
+  </label>
+  <br>
+  <label>
+    E-Mail
+    <input formControlName="mail" name="mail" type="email" required maxlength="255">
+    <span class="error"
+          *ngIf="form.controls.mail.touched && form.controls.mail.errors?.required">
+      <br>
+      E-Mail darf nicht leer sein!
+    </span>
+    <span class="error"
+          *ngIf="form.controls.mail.touched && form.controls.mail.errors?.email">
+      <br>
+      E-Mail muss valide sein!
+    </span>
+  </label>
+  <br>
+  <input type="submit" value="Anmelden">
+  <br>
+  <span class="backendError" *ngIf="backendError">{{backendError}}</span>
+</form>

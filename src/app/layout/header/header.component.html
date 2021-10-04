@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let type of types; trackBy trackBy">
+    <a [routerLink]="['type', type.id]">{{type.name}}</a>
+  </li>
+</ul>

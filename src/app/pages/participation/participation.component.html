@@ -1,0 +1,7 @@
+<span class="success" *ngIf="success == 'true'">Deine Anmeldung war erfolgreich!</span>
+
+<h1>{{event?.name}}</h1>
+<a>Freie Plätze: {{event?.freeSpots}} von {{event?.maxParticipants}}</a>
+<p>{{event?.description}}</p>
+
+<button (click)="unregister()">Abmelden</button>

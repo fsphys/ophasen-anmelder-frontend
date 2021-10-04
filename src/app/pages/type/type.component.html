@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let event of events; trackBy trackBy">
+    <a [routerLink]="['/event', event.id]">{{event.name}}</a>
+  </li>
+</ul>
