@@ -1,44 +1,42 @@
+<a (click)="back()"><i class="angle left icon"></i>Zurück zur Übersicht</a>
 <h1>{{event?.name}}</h1>
-<a>Freie Plätze: {{event?.freeSpots}} von {{event?.maxParticipants}}</a>
+<p><b>Freie Plätze:</b> {{event?.freeSpots}} von {{event?.maxParticipants}}</p>
+<p><b>Beschreibung:</b></p>
 <p>{{event?.description}}</p>
-<form [formGroup]="form" (submit)="submit()">
-  <label>
-    Vorname
+<form class="ui form error" [formGroup]="form" (submit)="submit()">
+  <div class="field">
+    <label>Vorname:</label>
     <input formControlName="surname" name="surname" type="text" required maxlength="255">
-    <span class="error"
-          *ngIf="form.controls.surname.touched && form.controls.surname.errors?.required">
-      <br>
-      Vorname darf nicht leer sein!
-    </span>
-  </label>
-  <br>
-  <label>
-    Nachname
+    <div class="ui error message" *ngIf="form.controls.surname.touched && form.controls.surname.errors?.required">
+      <p>Der Vorname darf nicht leer sein!</p>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Nachname</label>
     <input formControlName="givenName" name="givenName" type="text" required maxlength="255">
-    <span class="error"
-          *ngIf="form.controls.givenName.touched && form.controls.givenName.errors?.required">
-      <br>
-      Nachname darf nicht leer sein!
-    </span>
-  </label>
-  <br>
-  <label>
-    E-Mail
+    <div class="ui error message" *ngIf="form.controls.givenName.touched && form.controls.givenName.errors?.required">
+      <p>Der Nachname darf nicht leer sein!</p>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>E-Mail</label>
     <input formControlName="mail" name="mail" type="email" required maxlength="255">
-    <span class="error"
-          *ngIf="form.controls.mail.touched && form.controls.mail.errors?.required">
-      <br>
-      E-Mail darf nicht leer sein!
-    </span>
-    <span class="error"
-          *ngIf="form.controls.mail.touched && form.controls.mail.errors?.email">
-      <br>
-      E-Mail muss valide sein!
-    </span>
-  </label>
-  <br>
-  <input type="submit" value="Anmelden" [disabled]="loading">
-  <span class="loading" [hidden]="!loading">Loading...</span>
-  <br>
-  <span class="backendError" *ngIf="backendError">{{backendError}}</span>
+    <div class="ui error message" *ngIf="form.controls.mail.touched && form.controls.mail.errors?.required">
+      <p>Die E-Mail darf nicht leer sein!</p>
+    </div>
+    <div class="ui error message" *ngIf="form.controls.mail.touched && form.controls.mail.errors?.email">
+      <p>Die E-Mail muss valide sein!</p>
+    </div>
+  </div>
+
+  <div class="field">
+    <button class="ui submit primary button" type="submit" value="Anmelden" [disabled]="loading" [ngClass]="{'loading' : loading}">Anmelden</button>
+  </div>
+
+  <div class="ui error message" *ngIf="backendError">
+    <div class="header">Server-Fehler</div>
+    <p>{{backendError}}</p>
+  </div>
 </form>

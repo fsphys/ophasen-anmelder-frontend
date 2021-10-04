@@ -1,5 +1,16 @@
-<ul>
-  <li *ngFor="let event of events; trackBy trackBy">
-    <a [routerLink]="['/event', event.id]">{{event.name}}</a>
-  </li>
-</ul>
+<a [routerLink]="'/'" ><i class="angle left icon"></i>Zurück zur Startseite</a>
+
+<h1 class="ui dividing header">Angebotene Veranstaltungen</h1>
+<p>Hier findest du eine Liste der angebotenen Veranstaltungen. </p>
+
+<div [hidden]="!loading">
+
+</div>
+
+<div class="ui segments" *ngFor="let event of events; trackBy trackBy">
+  <div class="ui clearing segment">
+    <h3 class="header">{{event.name}}</h3>
+    <p><b>Freie Plätze:</b> {{event?.freeSpots}} von {{event?.maxParticipants}}</p>
+    <a class="ui button right floated" [routerLink]="['/event', event.id]">Weitere Infos & Anmeldung</a>
+  </div>
+</div>

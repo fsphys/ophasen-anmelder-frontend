@@ -11,7 +11,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./event.component.scss']
 })
 export class EventComponent implements OnInit {
-
   event?: Event
   form: FormGroup
   backendError?: string
@@ -44,4 +43,9 @@ export class EventComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  back() {
+    this.router.navigate(['/type', this.event?.eventTypeId]).then()
+  }
+
 }

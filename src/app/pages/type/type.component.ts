@@ -13,11 +13,16 @@ export class TypeComponent implements OnInit {
 
   events0?: Event[]
 
+  loading = true
+
   constructor(private readonly apiService: ApiService, private readonly activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.pipe(switchMap(params => this.apiService.fetchEventsByTypeId(params['id']))).subscribe(events => this.events0 = events);
+    this.activatedRoute.params.pipe(switchMap(params => this.apiService.fetchEventsByTypeId(params['id']))).subscribe(events => {
+      this.events0 = events;
+      this.loading = false;
+    });
   }
 
   get events() {
@@ -27,4 +32,9 @@ export class TypeComponent implements OnInit {
   trackBy(index: number, {id}: Event): string {
     return id;
   }
+
+  back() {
+
+  }
+
 }

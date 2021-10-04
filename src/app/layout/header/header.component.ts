@@ -1,6 +1,4 @@
 import {Component} from '@angular/core';
-import {ApiService} from '../../api/api.service';
-import {EventType} from "../../api/api.domain";
 
 @Component({
   selector: 'app-header',
@@ -9,14 +7,4 @@ import {EventType} from "../../api/api.domain";
 })
 export class HeaderComponent {
 
-  constructor(private readonly apiService: ApiService) {
-  }
-
-  get types() {
-    return this.apiService.types;
-  }
-
-  trackBy(index: number, {id}: EventType): string {
-    return id;
-  }
 }

@@ -1,8 +1,11 @@
-<span class="success" *ngIf="success == 'true'">Deine Anmeldung war erfolgreich!</span>
+<a [routerLink]="'/'" ><i class="angle left icon"></i>Zurück zur Startseite</a>
+<h1 class="ui header" *ngIf="success == 'true'">Erfolg!</h1>
+<p *ngIf="success == 'true'">Deine Anmeldung war erfolgreich!</p>
+<h1 class="ui header" *ngIf="success != 'true'">Deine Anmeldung</h1>
+<p>Hier unten findest du nochmal die Informationen zu deiner Anmeldung:</p>
 
-<h1>{{event?.name}}</h1>
-<a>Freie Plätze: {{event?.freeSpots}} von {{event?.maxParticipants}}</a>
+<h3>{{event?.name}}</h3>
+<p><b>Beschreibung:</b></p>
 <p>{{event?.description}}</p>
 
-<button [disabled]="loading" (click)="unregister()">Abmelden</button>
-<span class="loading" [hidden]="!loading">Loading...</span>
+<button class="ui submit primary button" [ngClass]="{'loading' : loading}" [disabled]="loading" (click)="unregister()">Abmelden</button>

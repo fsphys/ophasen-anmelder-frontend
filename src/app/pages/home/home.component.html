@@ -1,4 +1,13 @@
+<h1 class="ui dividing header">Willkommen auf der Anmeldeseite!</h1>
+
 <span class="error" *ngIf="error">{{error}}</span>
 <span class="success" *ngIf="success">{{success}}</span>
 
-<p>Bitte wähle einen Typ aus, um vorhandene Events anzuzeigen</p>
+<p>Bitte wähle einen Typ aus, um vorhandene Events anzuzeigen:</p>
+
+<div class="ui segments" *ngFor="let type of types; trackBy trackBy">
+  <div class="ui segment">
+    <h3 class="header">{{type.name}}</h3>
+    <a class="ui primary button" [routerLink]="['type', type.id]">Zur Anmeldung: {{type.name}}</a>
+  </div>
+</div>
