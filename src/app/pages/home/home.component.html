@@ -17,6 +17,7 @@
 <div class="ui segments" *ngFor="let type of types; trackBy trackBy">
   <div class="ui segment">
     <h3 class="header">{{type.name}}</h3>
+    <p><b>Anmeldeschluss:</b> {{type.registrationEndTime}}</p>
     <a class="ui primary button" [routerLink]="['type', type.id]">Zur Anmeldung: {{type.name}}</a>
   </div>
 </div>

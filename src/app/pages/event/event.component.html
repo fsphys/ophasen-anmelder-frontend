@@ -6,16 +6,16 @@
 <form class="ui form error" [formGroup]="form" (submit)="submit()">
   <div class="field">
     <label>Vorname:</label>
-    <input formControlName="surname" name="surname" type="text" required maxlength="255">
-    <div class="ui error message" *ngIf="form.controls.surname.touched && form.controls.surname.errors?.required">
+    <input formControlName="givenName" name="givenName" type="text" required maxlength="255">
+    <div class="ui error message" *ngIf="form.controls.givenName.touched && form.controls.givenName.errors?.required">
       <p>Der Vorname darf nicht leer sein!</p>
     </div>
   </div>
 
   <div class="field">
     <label>Nachname</label>
-    <input formControlName="givenName" name="givenName" type="text" required maxlength="255">
-    <div class="ui error message" *ngIf="form.controls.givenName.touched && form.controls.givenName.errors?.required">
+    <input formControlName="surname" name="surname" type="text" required maxlength="255">
+    <div class="ui error message" *ngIf="form.controls.surname.touched && form.controls.surname.errors?.required">
       <p>Der Nachname darf nicht leer sein!</p>
     </div>
   </div>
