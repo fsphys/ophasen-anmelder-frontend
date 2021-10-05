@@ -48,11 +48,14 @@ export class ApiService {
     eventId: string,
     surname: string,
     givenName: string,
-    mail: string
+    mail: string,
+    hasTicket: boolean,
+    birthDate: number | null,
+    birthPlace: string
   ): Observable<EventParticipation> {
     return this.http.post<EventParticipation>(
       `${environment.apiUrl}/event/participation`,
-      {eventId, surname, givenName, mail}
+      {eventId, surname, givenName, mail, hasTicket, birthDate, birthPlace}
     );
   }
 
