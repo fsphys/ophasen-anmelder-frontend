@@ -1,0 +1,37 @@
+name: Main
+
+on:
+  push:
+    branches: [ master ]
+    tags: [ 'v*' ]
+
+jobs:
+
+  lint:
+    runs-on: ubuntu-latest
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - run: npm i
+
+      - run: npm run build:ci -- --output-path=./dist
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: frontend
+          path: dist
