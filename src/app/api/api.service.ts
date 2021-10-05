@@ -18,7 +18,7 @@ export class ApiService {
   }
 
   get types() {
-    return this.types0 ?? []
+    return this.types0
   }
 
   private fetchEventTypes0(): Observable<EventType[]> {

@@ -5,6 +5,15 @@
 
 <p>Bitte wähle einen Typ aus, um vorhandene Events anzuzeigen:</p>
 
+<div class="ui text loader" *ngIf="!types" [ngClass]="{'active' : !types}"></div>
+
+<div class="ui placeholder segment" *ngIf="types && types.length == 0">
+  <div class="ui icon header">
+    <i class="map marked icon"></i>
+    Es gibt aktuell keine Angebote!
+  </div>
+</div>
+
 <div class="ui segments" *ngFor="let type of types; trackBy trackBy">
   <div class="ui segment">
     <h3 class="header">{{type.name}}</h3>

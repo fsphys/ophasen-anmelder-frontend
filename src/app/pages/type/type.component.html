@@ -3,8 +3,13 @@
 <h1 class="ui dividing header">Angebotene Veranstaltungen</h1>
 <p>Hier findest du eine Liste der angebotenen Veranstaltungen. </p>
 
-<div [hidden]="!loading">
+<div class="ui text loader" [hidden]="!loading" [ngClass]="{'active' : loading}"></div>
 
+<div class="ui placeholder segment" *ngIf="!loading && events && events.length == 0">
+  <div class="ui icon header">
+    <i class="map marked icon"></i>
+    Es gibt aktuell keine Angebote!
+  </div>
 </div>
 
 <div class="ui segments" *ngFor="let event of events; trackBy trackBy">

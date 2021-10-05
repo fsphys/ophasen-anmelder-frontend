@@ -31,6 +31,23 @@
     </div>
   </div>
 
+  <div class="inline field">
+    <div class="ui checkbox">
+      <input formControlName="hasTicket" name="hasTicket" type="checkbox">
+      <label>Hast du ein KVV-Semesterticket?</label>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Geburtsdatum:</label>
+    <input formControlName="birthDate" name="birthDate" type="date" maxlength="10">
+  </div>
+
+  <div class="field">
+    <label>Geburtsort:</label>
+    <input formControlName="birthPlace" name="birthPlace" type="text" maxlength="255">
+  </div>
+
   <div class="field">
     <button class="ui submit primary button" type="submit" value="Anmelden" [disabled]="loading" [ngClass]="{'loading' : loading}">Anmelden</button>
   </div>

@@ -5,7 +5,9 @@ export interface Event {
   description: string;
   maxParticipants: number;
   startTime: string;
-  freeSpots: number
+  freeSpots: number;
+  needsHasTicket: boolean;
+  needsBirthInformation: boolean;
 }
 
 export interface EventType {
@@ -21,4 +23,7 @@ export interface EventParticipation {
   surname: string;
   givenName: string;
   mail: string;
+  hasTicket: boolean;
+  BirthDate: string;
+  BirthPlace: string;
 }

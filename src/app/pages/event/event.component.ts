@@ -23,7 +23,10 @@ export class EventComponent implements OnInit {
     this.form = this.fb.group({
       surname: ["", [Validators.required, Validators.maxLength(255)]],
       givenName: ["", [Validators.required, Validators.maxLength(255)]],
-      mail: ["", [Validators.required, Validators.maxLength(255), Validators.email]]
+      mail: ["", [Validators.required, Validators.maxLength(255), Validators.email]],
+      hasTicket: [false],
+      birthDate: [""],
+      birthPlace: ["", [Validators.maxLength(255)]],
     })
   }
 
