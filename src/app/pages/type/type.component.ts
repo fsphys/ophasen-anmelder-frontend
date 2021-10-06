@@ -20,7 +20,7 @@ export class TypeComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.pipe(switchMap(params => this.apiService.fetchEventsByTypeId(params['id']))).subscribe(events => {
-      this.events0 = events;
+      this.events0 = events.sort((a, b) => a.name.localeCompare(b.name));
       this.loading = false;
     });
   }
