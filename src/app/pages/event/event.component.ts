@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../../api/api.service";
-import {Event} from "../../api/api.domain";
+import { Event, EventDraw, EventType } from "../../api/api.domain";
 import {switchMap} from "rxjs/operators";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
@@ -12,6 +12,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class EventComponent implements OnInit {
   event?: Event
+  eventType?: EventType
+  eventDraw?: EventDraw
   form: FormGroup
   backendError?: string
   loading?: boolean;
@@ -24,14 +26,23 @@ export class EventComponent implements OnInit {
       surname: ["", [Validators.required, Validators.maxLength(255)]],
       givenName: ["", [Validators.required, Validators.maxLength(255)]],
       mail: ["", [Validators.required, Validators.maxLength(255), Validators.email]],
-      hasTicket: [false],
       birthDate: [""],
       birthPlace: ["", [Validators.maxLength(255)]],
     })
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.pipe(switchMap(params => this.apiService.fetchEvent(params['id']))).subscribe(event => this.event = event);
+    this.activatedRoute.params.pipe(switchMap(params => this.apiService.fetchEvent(params['id']))).subscribe(event => {
+      this.event = event
+      this.apiService.fetchEventType(this.event.eventTypeId).subscribe(eventType => {
+        this.eventType= eventType
+        if (this.eventType.eventDrawId != null) {
+          this.apiService.fetchEventDraw(this.eventType.eventDrawId).subscribe(eventDraw => {
+            this.eventDraw = eventDraw
+          })
+        }
+      });
+    });
   }
 
 
@@ -50,7 +61,6 @@ export class EventComponent implements OnInit {
       this.form.value.surname,
       this.form.value.givenName,
       this.form.value.mail,
-      this.event.needsHasTicket ? this.form.value.hasTicket : null,
       this.event.needsBirthInformation ? new Date(this.form.value.birthDate).valueOf() / 1000 : null,
       this.event.needsBirthInformation ? this.form.value.birthPlace : null
     )

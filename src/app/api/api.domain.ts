@@ -6,7 +6,6 @@ export interface Event {
   maxParticipants: number;
   startTime: string;
   freeSpots: number;
-  needsHasTicket: boolean;
   needsBirthInformation: boolean;
 }
 
@@ -15,6 +14,13 @@ export interface EventType {
   name: string;
   registrationStartTime: string;
   registrationEndTime: string;
+  eventDrawId?: string;
+}
+
+export interface EventDraw {
+  id: string;
+  drawTime: string;
+  drawn: boolean;
 }
 
 export interface EventParticipation {
@@ -23,7 +29,6 @@ export interface EventParticipation {
   surname: string;
   givenName: string;
   mail: string;
-  hasTicket: boolean;
   BirthDate: string;
   BirthPlace: string;
 }

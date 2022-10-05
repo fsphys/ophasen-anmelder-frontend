@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Event, EventParticipation, EventType} from './api.domain';
+import { Event, EventDraw, EventParticipation, EventType } from "./api.domain";
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
@@ -34,6 +34,18 @@ export class ApiService {
     );
   }
 
+  fetchEventType(eventTypeId: string): Observable<EventType> {
+    return this.http.get<EventType>(
+      `${environment.apiUrl}/event/type/${eventTypeId}`
+    );
+  }
+
+  fetchEventDraw(eventDrawId: string): Observable<EventDraw> {
+    return this.http.get<EventDraw>(
+      `${environment.apiUrl}/event/draw/${eventDrawId}`
+    );
+  }
+
   fetchEvent(eventId: string): Observable<Event> {
     return this.http.get<Event>(
       `${environment.apiUrl}/event/${eventId}`
@@ -52,13 +64,12 @@ export class ApiService {
     surname: string,
     givenName: string,
     mail: string,
-    hasTicket: boolean,
     birthDate: number | null,
     birthPlace: string
   ): Observable<EventParticipation> {
     return this.http.post<EventParticipation>(
       `${environment.apiUrl}/event/participation`,
-      {eventId, surname, givenName, mail, hasTicket, birthDate, birthPlace}
+      {eventId, surname, givenName, mail, birthDate, birthPlace}
     );
   }
 

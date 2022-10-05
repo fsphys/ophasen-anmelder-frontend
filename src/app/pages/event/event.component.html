@@ -1,6 +1,8 @@
 <a [routerLink]="['/type', this.event?.eventTypeId]"><i class="angle left icon"></i>Zurück zur Übersicht</a>
 <h1>{{event?.name}}</h1>
-<p><b>Freie Plätze:</b> {{event?.freeSpots}} von {{event?.maxParticipants}}</p>
+<p *ngIf="!eventDraw"><b>Freie Plätze:</b> {{event?.freeSpots}} von {{event?.maxParticipants}}</p>
+<p *ngIf="eventDraw && eventDraw.drawn == false"><b>Gesamtanzahl an Plätzen:</b> {{event?.maxParticipants}}</p>
+<p *ngIf="eventDraw && eventDraw.drawn == true"><b>Freie Restplätze:</b> {{event?.freeSpots}}</p>
 <p><b>Beschreibung:</b></p>
 <p>{{event?.description}}</p>
 <form class="ui form error" [formGroup]="form" (submit)="submit()">
@@ -28,13 +30,6 @@
     </div>
     <div class="ui error message" *ngIf="form.controls.mail.touched && form.controls.mail.errors?.email">
       <p>Die E-Mail muss valide sein!</p>
-    </div>
-  </div>
-
-  <div class="inline field" *ngIf="event?.needsHasTicket">
-    <div class="ui checkbox">
-      <input formControlName="hasTicket" name="hasTicket" type="checkbox">
-      <label>Hast du ein KVV-Semesterticket?</label>
     </div>
   </div>
 

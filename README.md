@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Used resources
+
+- Fomantic-UI ([Project](https://fomantic-ui.com/), MIT License)
+- Font Awesome 5.13.0 ([Project](https://fontawesome.com/), CC BY 4.0 License & SIL OFL 1.1 License)
+- Lato Font ([Google font page](https://fonts.google.com/specimen/Lato/about), Open Font License)
