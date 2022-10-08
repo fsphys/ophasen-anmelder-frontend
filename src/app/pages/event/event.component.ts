@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../../api/api.service";
 import { Event, EventDraw, EventType } from "../../api/api.domain";
 import {switchMap} from "rxjs/operators";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-event',
@@ -14,14 +14,14 @@ export class EventComponent implements OnInit {
   event?: Event
   eventType?: EventType
   eventDraw?: EventDraw
-  form: FormGroup
+  form: UntypedFormGroup
   backendError?: string
   loading?: boolean;
 
   constructor(private readonly apiService: ApiService,
               private readonly activatedRoute: ActivatedRoute,
               private readonly router: Router,
-              private readonly fb: FormBuilder) {
+              private readonly fb: UntypedFormBuilder) {
     this.form = this.fb.group({
       surname: ["", [Validators.required, Validators.maxLength(255)]],
       givenName: ["", [Validators.required, Validators.maxLength(255)]],
