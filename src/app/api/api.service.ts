@@ -58,6 +58,11 @@ export class ApiService {
     );
   }
 
+  fetchDrawEventParticipation(eventId: string): Observable<EventParticipation> {
+    return this.http.get<EventParticipation>(
+      `${environment.apiUrl}/event/draw/participation/${eventId}`
+    );
+  }
 
   joinEvent(
     eventId: string,
@@ -90,6 +95,12 @@ export class ApiService {
   deleteParticipation(eventParticipationId: string): Observable<void> {
     return this.http.delete<void>(
       `${environment.apiUrl}/event/participation/${eventParticipationId}`
+    );
+  }
+
+  deleteDraw(eventDrawParticipationId: string): Observable<void> {
+    return this.http.delete<void>(
+      `${environment.apiUrl}/event/draw/participation/${eventDrawParticipationId}`
     );
   }
 }

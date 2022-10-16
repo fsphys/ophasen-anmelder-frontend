@@ -24,7 +24,7 @@ export class DrawParticipationComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.pipe(switchMap(
-      params => this.apiService.fetchEventParticipation(params['id'])))
+      params => this.apiService.fetchDrawEventParticipation(params['id'])))
       .pipe(switchMap(eventParticipation => {
           this.eventParticipation = eventParticipation;
           return this.apiService.fetchEvent(eventParticipation.eventId)
@@ -36,7 +36,7 @@ export class DrawParticipationComponent implements OnInit {
   unregister() {
     this.loading = true;
     this.activatedRoute.params.pipe(
-      switchMap(params => this.apiService.deleteParticipation(params['id'])),
+      switchMap(params => this.apiService.deleteDraw(params['id'])),
       catchError(error => throwError(this.router.navigate(['/draw/participation'], {queryParams: {error: error.error.message}})))
     ).subscribe(value => this.router.navigate(['/'], {queryParams: {success: 'Deine Abmeldung war erfolgreich.'}}));
   }

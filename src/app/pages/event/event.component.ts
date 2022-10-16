@@ -56,7 +56,7 @@ export class EventComponent implements OnInit {
     this.backendError = undefined;
     this.loading = true;
 
-    if (this.eventDraw == null){
+    if (this.eventDraw == null || this.eventDraw.drawn){
       this.apiService.joinEvent(
         this.event.id,
         this.form.value.surname,
