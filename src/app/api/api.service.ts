@@ -73,6 +73,20 @@ export class ApiService {
     );
   }
 
+  joinDraw(
+    eventId: string,
+    surname: string,
+    givenName: string,
+    mail: string,
+    birthDate: number | null,
+    birthPlace: string
+  ): Observable<EventParticipation> {
+    return this.http.post<EventParticipation>(
+      `${environment.apiUrl}/event/draw/participation`,
+      {eventId, surname, givenName, mail, birthDate, birthPlace}
+    );
+  }
+
   deleteParticipation(eventParticipationId: string): Observable<void> {
     return this.http.delete<void>(
       `${environment.apiUrl}/event/participation/${eventParticipationId}`

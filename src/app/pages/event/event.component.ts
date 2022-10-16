@@ -51,25 +51,42 @@ export class EventComponent implements OnInit {
       || (this.event.needsBirthInformation && (this.form.value.birthDate == '' || this.form.value.birthPlace == ''))) {
       this.backendError = 'Bitte fülle alle Felder aus!'
       return;
-
     }
 
     this.backendError = undefined;
     this.loading = true;
-    this.apiService.joinEvent(
-      this.event.id,
-      this.form.value.surname,
-      this.form.value.givenName,
-      this.form.value.mail,
-      this.event.needsBirthInformation ? new Date(this.form.value.birthDate).valueOf() / 1000 : null,
-      this.event.needsBirthInformation ? this.form.value.birthPlace : null
-    )
-      .pipe(switchMap(value => this.router.navigate(['/participation', value.id], {queryParams: {success: true}}))).subscribe(value => {
-      // noop
-    }, error => {
-      this.backendError = error.error.message;
-      this.loading = false;
-    });
+
+    if (this.eventDraw == null){
+      this.apiService.joinEvent(
+        this.event.id,
+        this.form.value.surname,
+        this.form.value.givenName,
+        this.form.value.mail,
+        this.event.needsBirthInformation ? new Date(this.form.value.birthDate).valueOf() / 1000 : null,
+        this.event.needsBirthInformation ? this.form.value.birthPlace : null
+      )
+        .pipe(switchMap(value => this.router.navigate(['/participation', value.id], {queryParams: {success: true}}))).subscribe(value => {
+        // noop
+      }, error => {
+        this.backendError = error.error.message;
+        this.loading = false;
+      });
+    } else {
+      this.apiService.joinDraw(
+        this.event.id,
+        this.form.value.surname,
+        this.form.value.givenName,
+        this.form.value.mail,
+        this.event.needsBirthInformation ? new Date(this.form.value.birthDate).valueOf() / 1000 : null,
+        this.event.needsBirthInformation ? this.form.value.birthPlace : null
+      )
+        .pipe(switchMap(value => this.router.navigate(['/draw/participation', value.id], {queryParams: {success: true}}))).subscribe(value => {
+        // noop
+      }, error => {
+        this.backendError = error.error.message;
+        this.loading = false;
+      });
+    }
   }
 
 }

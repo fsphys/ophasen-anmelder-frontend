@@ -19,6 +19,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/participation/participation.module').then(m => m.ParticipationModule)
   },
   {
+    path: 'draw/participation',
+    loadChildren: () => import('./pages/draw-participation/draw-participation.module').then(m => m.DrawParticipationModule)
+  },
+  {
     path: '**',
     pathMatch: 'full',
     redirectTo: '/'

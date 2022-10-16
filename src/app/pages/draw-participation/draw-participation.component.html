@@ -1,0 +1,11 @@
+<a [routerLink]="'/'" ><i class="angle left icon"></i>Zurück zur Startseite</a>
+<h1 class="ui header" *ngIf="success == 'true'">Erfolg!</h1>
+<p *ngIf="success == 'true'">Deine Anmeldung zur <b>Verlosung</b> war erfolgreich!</p>
+<h1 class="ui header" *ngIf="success != 'true'">Deine Angaben zur Verlosung</h1>
+<p>Hier unten findest du nochmal die Informationen zu der Verlosung:</p>
+
+<h3>{{event?.name}}</h3>
+<p><b>Beschreibung:</b></p>
+<p>{{event?.description}}</p>
+
+<button class="ui submit primary button" [ngClass]="{'loading' : loading}" [disabled]="loading" (click)="unregister()">Abmelden</button>
