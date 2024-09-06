@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ophasen-anmelder-frontend:build:production"
+              "buildTarget": "ophasen-anmelder-frontend:build:production"
             },
             "development": {
-              "browserTarget": "ophasen-anmelder-frontend:build:development"
+              "buildTarget": "ophasen-anmelder-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ophasen-anmelder-frontend:build"
+            "buildTarget": "ophasen-anmelder-frontend:build"
           }
         },
         "test": {
