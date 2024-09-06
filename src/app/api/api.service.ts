@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import { Event, EventDraw, EventParticipation, EventType } from "./api.domain";
 import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
 @Injectable({
