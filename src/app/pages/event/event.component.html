@@ -1,10 +1,15 @@
 <a [routerLink]="['/type', this.event?.eventTypeId]"><i class="angle left icon"></i>Zurück zur Übersicht</a>
-<h1>{{event?.name}}</h1>
-<p *ngIf="!eventDraw"><b>Freie Plätze:</b> {{event?.freeSpots}} von {{event?.maxParticipants}}</p>
-<p *ngIf="eventDraw && eventDraw.drawn == false"><b>Gesamtanzahl an Plätzen:</b> {{event?.maxParticipants}}</p>
-<p *ngIf="eventDraw && eventDraw.drawn == true"><b>Freie Restplätze:</b> {{event?.freeSpots}}</p>
+<h1>{{ event?.name }}</h1>
+<p *ngIf="!eventDraw"><b>Freie Plätze:</b> {{ event?.freeSpots }} von {{ event?.maxParticipants }}</p>
+<p *ngIf="eventDraw && !eventDraw.drawn"><b>Gesamtanzahl an Plätzen:</b> {{ event?.maxParticipants }}</p>
+<p *ngIf="eventDraw && eventDraw.drawn"><b>Freie Restplätze:</b> {{ event?.freeSpots }}</p>
 <p><b>Beschreibung:</b></p>
-<p>{{event?.description}}</p>
+<p>{{ event?.description }}</p>
+<p *ngIf="event?.meetingPoint"><b>Treffpunkt:</b></p>
+<p *ngIf="event?.meetingPoint">{{ event?.meetingPoint }}</p>
+<p *ngIf="event?.meetingTime"><b>Treffzeitpunkt:</b></p>
+<p *ngIf="event?.meetingTime">{{ event?.meetingTime }}</p>
+
 <form class="ui form error" [formGroup]="form" (submit)="submit()">
   <div class="field">
     <label>Vorname:</label>
@@ -45,10 +50,12 @@
 
   <div class="ui error message" *ngIf="backendError">
     <div class="header">Error:</div>
-    <p>{{backendError}}</p>
+    <p>{{ backendError }}</p>
   </div>
 
   <div class="field">
-    <button class="ui submit primary button" type="submit" value="Anmelden" [disabled]="loading" [ngClass]="{'loading' : loading}">Anmelden</button>
+    <button class="ui submit primary button" type="submit" value="Anmelden" [disabled]="loading"
+            [ngClass]="{'loading' : loading}">Anmelden
+    </button>
   </div>
 </form>

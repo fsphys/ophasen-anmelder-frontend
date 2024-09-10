@@ -7,6 +7,8 @@ export interface Event {
   startTime: string;
   freeSpots: number;
   needsBirthInformation: boolean;
+  meetingTime: string;
+  meetingPoint: string;
 }
 
 export interface EventType {
