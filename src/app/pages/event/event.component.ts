@@ -34,6 +34,7 @@ export class EventComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.pipe(switchMap(params => this.apiService.fetchEvent(params['id']))).subscribe(event => {
       this.event = event
+      this.event.meetingTime = new Date(this.event.meetingTime).toLocaleString();
       this.apiService.fetchEventType(this.event.eventTypeId).subscribe(eventType => {
         this.eventType= eventType
         if (this.eventType.eventDrawId != null) {
