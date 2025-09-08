@@ -1,61 +1,89 @@
 <a [routerLink]="['/type', this.event?.eventTypeId]"><i class="angle left icon"></i>Zurück zur Übersicht</a>
 <h1>{{ event?.name }}</h1>
-<p *ngIf="!eventDraw"><b>Freie Plätze:</b> {{ event?.freeSpots }} von {{ event?.maxParticipants }}</p>
-<p *ngIf="eventDraw && !eventDraw.drawn"><b>Gesamtanzahl an Plätzen:</b> {{ event?.maxParticipants }}</p>
-<p *ngIf="eventDraw && eventDraw.drawn"><b>Freie Restplätze:</b> {{ event?.freeSpots }}</p>
+@if (!eventDraw) {
+  <p><b>Freie Plätze:</b> {{ event?.freeSpots }} von {{ event?.maxParticipants }}</p>
+}
+@if (eventDraw && !eventDraw.drawn) {
+  <p><b>Gesamtanzahl an Plätzen:</b> {{ event?.maxParticipants }}</p>
+}
+@if (eventDraw && eventDraw.drawn) {
+  <p><b>Freie Restplätze:</b> {{ event?.freeSpots }}</p>
+}
 <p><b>Beschreibung:</b></p>
 <p>{{ event?.description }}</p>
-<p *ngIf="event?.meetingPoint"><b>Treffpunkt:</b></p>
-<p *ngIf="event?.meetingPoint">{{ event?.meetingPoint }}</p>
-<p *ngIf="event?.meetingTime"><b>Treffzeitpunkt:</b></p>
-<p *ngIf="event?.meetingTime">{{ event?.meetingTime }}</p>
+@if (event?.meetingPoint) {
+  <p><b>Treffpunkt:</b></p>
+}
+@if (event?.meetingPoint) {
+  <p>{{ event?.meetingPoint }}</p>
+}
+@if (event?.meetingTime) {
+  <p><b>Treffzeitpunkt:</b></p>
+}
+@if (event?.meetingTime) {
+  <p>{{ event?.meetingTime }}</p>
+}
 
 <form class="ui form error" [formGroup]="form" (submit)="submit()">
   <div class="field">
     <label>Vorname:</label>
     <input formControlName="givenName" name="givenName" type="text" required maxlength="255">
-    <div class="ui error message" *ngIf="form.controls.givenName.touched && form.controls.givenName.errors?.required">
-      <p>Der Vorname darf nicht leer sein!</p>
-    </div>
+    @if (form.controls.givenName.touched && form.controls.givenName.errors?.required) {
+      <div class="ui error message">
+        <p>Der Vorname darf nicht leer sein!</p>
+      </div>
+    }
   </div>
 
   <div class="field">
     <label>Nachname</label>
     <input formControlName="surname" name="surname" type="text" required maxlength="255">
-    <div class="ui error message" *ngIf="form.controls.surname.touched && form.controls.surname.errors?.required">
-      <p>Der Nachname darf nicht leer sein!</p>
-    </div>
+    @if (form.controls.surname.touched && form.controls.surname.errors?.required) {
+      <div class="ui error message">
+        <p>Der Nachname darf nicht leer sein!</p>
+      </div>
+    }
   </div>
 
   <div class="field">
     <label>E-Mail</label>
     <input formControlName="mail" name="mail" type="email" required maxlength="255">
-    <div class="ui error message" *ngIf="form.controls.mail.touched && form.controls.mail.errors?.required">
-      <p>Die E-Mail darf nicht leer sein!</p>
+    @if (form.controls.mail.touched && form.controls.mail.errors?.required) {
+      <div class="ui error message">
+        <p>Die E-Mail darf nicht leer sein!</p>
+      </div>
+    }
+    @if (form.controls.mail.touched && form.controls.mail.errors?.email) {
+      <div class="ui error message">
+        <p>Die E-Mail muss valide sein!</p>
+      </div>
+    }
+  </div>
+
+  @if (event?.needsBirthInformation) {
+    <div class="field">
+      <label>Geburtsdatum:</label>
+      <input formControlName="birthDate" name="birthDate" type="date" maxlength="10">
     </div>
-    <div class="ui error message" *ngIf="form.controls.mail.touched && form.controls.mail.errors?.email">
-      <p>Die E-Mail muss valide sein!</p>
+  }
+
+  @if (event?.needsBirthInformation) {
+    <div class="field">
+      <label>Geburtsort:</label>
+      <input formControlName="birthPlace" name="birthPlace" type="text" maxlength="255">
     </div>
-  </div>
+  }
 
-  <div class="field" *ngIf="event?.needsBirthInformation">
-    <label>Geburtsdatum:</label>
-    <input formControlName="birthDate" name="birthDate" type="date" maxlength="10">
-  </div>
-
-  <div class="field" *ngIf="event?.needsBirthInformation">
-    <label>Geburtsort:</label>
-    <input formControlName="birthPlace" name="birthPlace" type="text" maxlength="255">
-  </div>
-
-  <div class="ui error message" *ngIf="backendError">
-    <div class="header">Error:</div>
-    <p>{{ backendError }}</p>
-  </div>
+  @if (backendError) {
+    <div class="ui error message">
+      <div class="header">Error:</div>
+      <p>{{ backendError }}</p>
+    </div>
+  }
 
   <div class="field">
     <button class="ui submit primary button" type="submit" value="Anmelden" [disabled]="loading"
-            [ngClass]="{'loading' : loading}">Anmelden
+      [ngClass]="{'loading' : loading}">Anmelden
     </button>
   </div>
 </form>

@@ -5,34 +5,52 @@
 
 <div class="ui text loader" [hidden]="!loading" [ngClass]="{'active' : loading}"></div>
 
-<div class="ui placeholder segment" *ngIf="!loading && events && events.length == 0">
-  <div class="ui icon header">
-    <i class="map marked icon"></i>
-    Es gibt aktuell keine Angebote!
+@if (!loading && events && events.length == 0) {
+  <div class="ui placeholder segment">
+    <div class="ui icon header">
+      <i class="map marked icon"></i>
+      Es gibt aktuell keine Angebote!
+    </div>
   </div>
-</div>
+}
 
-<div *ngIf="eventType && eventDraw">
-  <p *ngIf="eventDraw.drawn">Die Loswahl wurde schon am {{ eventDraw.drawTime }} ausgewertet. Nun ist noch bis zum
-    {{ eventType.registrationEndTime }} die Anmeldung für die Restplätze möglich.</p>
-  <p *ngIf="!eventDraw.drawn">Dies ist eine Loswahl. Das ganze funktioniert so, dass ihr euch bis zum
-    {{ eventDraw.drawTime }} für eure gewünschten Veranstaltungen anmelden könnt. Um {{ eventDraw.drawTime }} wird die
-    Wahl dann ausgewertet und ihr erhaltet per E-Mail bescheid, ob ihr einen Platz in eure gewünschte Veranstaltung
-    bekommen habt oder nicht. All diejenigen, die dann noch keinen Platz haben, können sich nach
-    {{ eventDraw.drawTime }} und bis um {{ eventType.registrationEndTime }} noch für die übrigen Restplätze anmelden.
-    Es ist sichergestellt, dass mehr Plätze als Teilnehmer existieren, sodass jeder einen Platz bekommt.</p>
-</div>
-
-<div *ngIf="!eventDraw">
-  <p>Dies ist eine reguläre Anmeldung, wo die Plätze nach dem Prinzip "first come, first serve" verteilt werden.</p>
-</div>
-
-<div class="ui segments" *ngFor="let event of events; trackBy trackBy">
-  <div class="ui clearing segment">
-    <h3 class="header">{{event.name}}</h3>
-    <p *ngIf="!eventDraw"><b>Freie Plätze:</b> {{event?.freeSpots}} von {{event?.maxParticipants}}</p>
-    <p *ngIf="eventDraw && eventDraw.drawn == false"><b>Gesamtanzahl an Plätzen:</b> {{event?.maxParticipants}}</p>
-    <p *ngIf="eventDraw && eventDraw.drawn == true"><b>Freie Restplätze:</b> {{event?.freeSpots}}</p>
-    <a class="ui button right floated" [routerLink]="['/event', event.id]">Weitere Infos & Anmeldung</a>
+@if (eventType && eventDraw) {
+  <div>
+    @if (eventDraw.drawn) {
+      <p>Die Loswahl wurde schon am {{ eventDraw.drawTime }} ausgewertet. Nun ist noch bis zum
+      {{ eventType.registrationEndTime }} die Anmeldung für die Restplätze möglich.</p>
+    }
+    @if (!eventDraw.drawn) {
+      <p>Dies ist eine Loswahl. Das ganze funktioniert so, dass ihr euch bis zum
+        {{ eventDraw.drawTime }} für eure gewünschten Veranstaltungen anmelden könnt. Um {{ eventDraw.drawTime }} wird die
+        Wahl dann ausgewertet und ihr erhaltet per E-Mail bescheid, ob ihr einen Platz in eure gewünschte Veranstaltung
+        bekommen habt oder nicht. All diejenigen, die dann noch keinen Platz haben, können sich nach
+        {{ eventDraw.drawTime }} und bis um {{ eventType.registrationEndTime }} noch für die übrigen Restplätze anmelden.
+      Es ist sichergestellt, dass mehr Plätze als Teilnehmer existieren, sodass jeder einen Platz bekommt.</p>
+    }
   </div>
-</div>
+}
+
+@if (!eventDraw) {
+  <div>
+    <p>Dies ist eine reguläre Anmeldung, wo die Plätze nach dem Prinzip "first come, first serve" verteilt werden.</p>
+  </div>
+}
+
+@for (event of events; track event) {
+  <div class="ui segments">
+    <div class="ui clearing segment">
+      <h3 class="header">{{event.name}}</h3>
+      @if (!eventDraw) {
+        <p><b>Freie Plätze:</b> {{event?.freeSpots}} von {{event?.maxParticipants}}</p>
+      }
+      @if (eventDraw && eventDraw.drawn == false) {
+        <p><b>Gesamtanzahl an Plätzen:</b> {{event?.maxParticipants}}</p>
+      }
+      @if (eventDraw && eventDraw.drawn == true) {
+        <p><b>Freie Restplätze:</b> {{event?.freeSpots}}</p>
+      }
+      <a class="ui button right floated" [routerLink]="['/event', event.id]">Weitere Infos & Anmeldung</a>
+    </div>
+  </div>
+}

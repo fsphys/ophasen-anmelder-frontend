@@ -1,23 +1,33 @@
 <h1 class="ui dividing header">Willkommen auf der Anmeldeseite!</h1>
 
-<span class="error" *ngIf="error">{{error}}</span>
-<span class="success" *ngIf="success">{{success}}</span>
+@if (error) {
+  <span class="error">{{error}}</span>
+}
+@if (success) {
+  <span class="success">{{success}}</span>
+}
 
 <p>Bitte wähle einen Typ aus, um vorhandene Events anzuzeigen:</p>
 
-<div class="ui text loader" *ngIf="!types" [ngClass]="{'active' : !types}"></div>
+@if (!types) {
+  <div class="ui text loader" [ngClass]="{'active' : !types}"></div>
+}
 
-<div class="ui placeholder segment" *ngIf="types && types.length == 0">
-  <div class="ui icon header">
-    <i class="map marked icon"></i>
-    Es gibt aktuell keine Angebote!
+@if (types && types.length == 0) {
+  <div class="ui placeholder segment">
+    <div class="ui icon header">
+      <i class="map marked icon"></i>
+      Es gibt aktuell keine Angebote!
+    </div>
   </div>
-</div>
+}
 
-<div class="ui segments" *ngFor="let type of types; trackBy trackBy">
-  <div class="ui segment">
-    <h3 class="header">{{type.name}}</h3>
-    <p><b>Anmeldeschluss:</b> {{type.registrationEndTime}}</p>
-    <a class="ui primary button" [routerLink]="['type', type.id]">Zur Anmeldung: {{type.name}}</a>
+@for (type of types; track type) {
+  <div class="ui segments">
+    <div class="ui segment">
+      <h3 class="header">{{type.name}}</h3>
+      <p><b>Anmeldeschluss:</b> {{type.registrationEndTime}}</p>
+      <a class="ui primary button" [routerLink]="['type', type.id]">Zur Anmeldung: {{type.name}}</a>
+    </div>
   </div>
-</div>
+}

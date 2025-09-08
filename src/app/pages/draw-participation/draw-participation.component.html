@@ -1,7 +1,13 @@
 <a [routerLink]="'/'" ><i class="angle left icon"></i>Zurück zur Startseite</a>
-<h1 class="ui header" *ngIf="success == 'true'">Erfolg!</h1>
-<p *ngIf="success == 'true'">Deine Anmeldung zur <b>Verlosung</b> war erfolgreich!</p>
-<h1 class="ui header" *ngIf="success != 'true'">Deine Angaben zur Verlosung</h1>
+@if (success == 'true') {
+  <h1 class="ui header">Erfolg!</h1>
+}
+@if (success == 'true') {
+  <p>Deine Anmeldung zur <b>Verlosung</b> war erfolgreich!</p>
+}
+@if (success != 'true') {
+  <h1 class="ui header">Deine Angaben zur Verlosung</h1>
+}
 <p>Hier unten findest du nochmal die Informationen zu der Verlosung:</p>
 
 <h3>{{event?.name}}</h3>

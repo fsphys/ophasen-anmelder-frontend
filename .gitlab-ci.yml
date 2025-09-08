@@ -1,0 +1,20 @@
+---
+default:
+  image: registry.cert.kit.edu/hub/node:latest
+
+before_script:
+  - apt-get -y update
+
+stages:
+  - build
+
+node:
+  stage: build
+  script:
+    - npm install
+    - npm run build:ci -- --output-path=./dist
+  artifacts:
+    paths:
+      - dist
+  needs: []
+  allow_failure: false
