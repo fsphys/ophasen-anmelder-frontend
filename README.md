@@ -1,6 +1,6 @@
 # OphasenAnmelderFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
+This is the TypeScript based web frontend for the O-Phasen Anmelder backend.
 
 ## Development server
 

@@ -6,9 +6,10 @@ import {switchMap} from "rxjs/operators";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 
 @Component({
-  selector: 'app-event',
-  templateUrl: './event.component.html',
-  styleUrls: ['./event.component.scss']
+    selector: 'app-event',
+    templateUrl: './event.component.html',
+    styleUrls: ['./event.component.scss'],
+    standalone: false
 })
 export class EventComponent implements OnInit {
   event?: Event

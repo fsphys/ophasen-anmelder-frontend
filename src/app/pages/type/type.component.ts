@@ -6,9 +6,10 @@ import { Event, EventDraw, EventType } from "../../api/api.domain";
 import { forkJoin } from 'rxjs/internal/observable/forkJoin';
 
 @Component({
-  selector: 'app-type',
-  templateUrl: './type.component.html',
-  styleUrls: ['./type.component.scss']
+    selector: 'app-type',
+    templateUrl: './type.component.html',
+    styleUrls: ['./type.component.scss'],
+    standalone: false
 })
 export class TypeComponent implements OnInit {
 

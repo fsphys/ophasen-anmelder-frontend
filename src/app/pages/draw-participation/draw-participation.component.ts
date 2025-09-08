@@ -6,9 +6,10 @@ import {Event, EventParticipation} from "../../api/api.domain";
 import {throwError} from "rxjs";
 
 @Component({
-  selector: 'app-participation',
-  templateUrl: './draw-participation.component.html',
-  styleUrls: ['./draw-participation.component.scss']
+    selector: 'app-participation',
+    templateUrl: './draw-participation.component.html',
+    styleUrls: ['./draw-participation.component.scss'],
+    standalone: false
 })
 export class DrawParticipationComponent implements OnInit {
 
