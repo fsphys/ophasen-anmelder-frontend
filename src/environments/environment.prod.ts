@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://ophase.org/events/api'
+  apiUrl: 'https://events.ophase.org/api'
 };
