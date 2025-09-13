@@ -29,7 +29,7 @@ export class DrawParticipationComponent implements OnInit {
       .pipe(switchMap(eventParticipation => {
           this.eventParticipation = eventParticipation;
           return this.apiService.fetchEvent(eventParticipation.eventId)
-        }), catchError(error => throwError(this.router.navigate(['/'], {queryParams: {error: error.error.message}})))
+        }), catchError(error => throwError(this.router.navigate(['/'], {queryParams: {error: error.error.errorMessage}})))
       ).subscribe(event => this.event = event);
     this.activatedRoute.queryParams.subscribe(params => this.success = params.success);
   }
@@ -38,7 +38,7 @@ export class DrawParticipationComponent implements OnInit {
     this.loading = true;
     this.activatedRoute.params.pipe(
       switchMap(params => this.apiService.deleteDraw(params['id'])),
-      catchError(error => throwError(this.router.navigate(['/draw/participation'], {queryParams: {error: error.error.message}})))
+      catchError(error => throwError(this.router.navigate(['/draw/participation'], {queryParams: {error: error.error.errorMessage}})))
     ).subscribe(value => this.router.navigate(['/'], {queryParams: {success: 'Deine Abmeldung war erfolgreich.'}}));
   }
 }

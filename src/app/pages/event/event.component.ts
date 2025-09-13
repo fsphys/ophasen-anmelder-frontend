@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ApiService} from "../../api/api.service";
-import { Event, EventDraw, EventType } from "../../api/api.domain";
+import {Event, EventDraw, EventType} from "../../api/api.domain";
 import {switchMap} from "rxjs/operators";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 
 @Component({
-    selector: 'app-event',
-    templateUrl: './event.component.html',
-    styleUrls: ['./event.component.scss'],
-    standalone: false
+  selector: 'app-event',
+  templateUrl: './event.component.html',
+  styleUrls: ['./event.component.scss'],
+  standalone: false
 })
 export class EventComponent implements OnInit {
   event?: Event
@@ -37,7 +37,7 @@ export class EventComponent implements OnInit {
       this.event = event
       this.event.meetingTime = new Date(this.event.meetingTime).toLocaleString();
       this.apiService.fetchEventType(this.event.eventTypeId).subscribe(eventType => {
-        this.eventType= eventType
+        this.eventType = eventType
         if (this.eventType.eventDrawId != null) {
           this.apiService.fetchEventDraw(this.eventType.eventDrawId).subscribe(eventDraw => {
             this.eventDraw = eventDraw
@@ -58,7 +58,7 @@ export class EventComponent implements OnInit {
     this.backendError = undefined;
     this.loading = true;
 
-    if (this.eventDraw == null || this.eventDraw.drawn){
+    if (this.eventDraw == null || this.eventDraw.drawn) {
       this.apiService.joinEvent(
         this.event.id,
         this.form.value.surname,
@@ -70,7 +70,7 @@ export class EventComponent implements OnInit {
         .pipe(switchMap(value => this.router.navigate(['/participation', value.id], {queryParams: {success: true}}))).subscribe(value => {
         // noop
       }, error => {
-        this.backendError = error.error.message;
+        this.backendError = error.error.errorMessage;
         this.loading = false;
       });
     } else {
@@ -85,7 +85,7 @@ export class EventComponent implements OnInit {
         .pipe(switchMap(value => this.router.navigate(['/draw/participation', value.id], {queryParams: {success: true}}))).subscribe(value => {
         // noop
       }, error => {
-        this.backendError = error.error.message;
+        this.backendError = error.error.errorMessage;
         this.loading = false;
       });
     }
